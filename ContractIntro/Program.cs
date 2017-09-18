@@ -11,11 +11,11 @@ namespace ContractIntro
     {
         static void Main(string[] args)
         {
-            TestSearch();
+            //TestSearch();
             //TestInit();
             //TestReverse();
             //TestSwap();
-            Console.WriteLine(Gcd(8, 12));
+            TestGcd();
         }
 
         static int Add(int x, int y)
@@ -153,8 +153,28 @@ namespace ContractIntro
             Console.WriteLine(x + " " + y);
         }
 
+        static void TestGcd()
+        {
+            for (int x = 1; x < 100; x++)
+            {
+                for (int y = x + 1; y < 100; y++)
+                    Console.WriteLine("GCD " + x + ", " + y + " = " + Gcd(x, y));
+            }
+            Console.ReadKey();
+        }
+
         static int Gcd(int x, int y)
         {
+            Contract.Requires(x > 0 && y > 0);
+
+            // the result is a divisor
+            Contract.Ensures(x % Contract.Result<int>() == 0 &&
+                             y % Contract.Result<int>() == 0);
+
+            //and it is the largest one...
+            Contract.Ensures(Contract.ForAll(Contract.Result<int>() + 1,
+                                             Math.Min(x, y) + 1,
+                                             d => x % d != 0 || y % d != 0));
             if (x == y) return x;
             if (x > y) return Gcd(x - y, y);
             return Gcd(y - x, x);
