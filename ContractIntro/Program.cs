@@ -54,7 +54,7 @@ namespace ContractIntro
         static void TestReverse()
         {
             int[] a = { 1, 2, 3, 4, 5, 6, 7 };
-            reverse(a);
+            Reverse(a);
             foreach (int v in a)
                 Console.Write(" " + v);
             Console.ReadLine();
@@ -74,7 +74,7 @@ namespace ContractIntro
          * Pre: a != null && a.Length > 0
          * Post: a is the reverse of its orginal value
         **/
-        public static void reverse(int[] a)
+        public static void Reverse(int[] a)
         {
             Contract.Requires(a != null && a.Length > 0);
             Contract.Ensures(Contract.ForAll(0, a.Length / 2, index =>
