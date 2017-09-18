@@ -15,6 +15,7 @@ namespace ContractIntro
             //TestInit();
             //TestReverse();
             //TestSwap();
+            Console.WriteLine(Gcd(8, 12));
         }
 
         static int Add(int x, int y)
@@ -127,8 +128,10 @@ namespace ContractIntro
             while (i < b.Length)
             {
                 if (x == b[i])
+                {
                     res = i;
-
+                    break;
+                }
                 i = i + 1;
 
             }
@@ -148,6 +151,25 @@ namespace ContractIntro
             int x = 4, y = 2;
             Swap(ref x, ref y);
             Console.WriteLine(x + " " + y);
+        }
+
+        static int Gcd(int x, int y)
+        {
+            if (x == y) return x;
+            if (x > y) return Gcd(x - y, y);
+            return Gcd(y - x, x);
+        }
+
+        static bool IsPrime(int p)
+        {
+            Contract.Requires(p > 1);
+            Contract.Ensures(Contract.Result<bool>() ==
+                Contract.ForAll(2, p - 1, divisor => p % divisor != 0));
+            
+            for (int divisor = 2; divisor < p - 2; divisor++)
+                if (p % divisor == 0)
+                    return false;
+            return true;
         }
     }
 
