@@ -11,11 +11,33 @@ namespace ContractIntro
     {
         static void Main(string[] args)
         {
-            //TestSearch();
+            TestSearch();
             //TestInit();
             //TestReverse();
             //TestSwap();
-            TestGcd();
+            //TestGcd();
+            //TestSum();
+        }
+
+        static void TestSum()
+        {
+            int[] a = { 1, 2, 3, 4, 5 };
+            Console.WriteLine(Sum(a));
+            Console.ReadKey();
+        }
+        static int Sum(int[] a)
+        {
+            Contract.Requires(a != null);
+
+            // the result is the sum of the numbers in a
+
+            // a is not changed
+            Contract.Ensures(Contract.ForAll(0, a.Length, 
+                             idx => a[idx] == Contract.OldValue(a[idx]) ) );
+            int res = 0;
+            for (int i = 0; i < a.Length; i++) res += a[i];
+            a[0]++;
+            return res;
         }
 
         static int Add(int x, int y)
@@ -43,6 +65,7 @@ namespace ContractIntro
         {
             Contract.Requires(a != null, "Pre condition not meet!");
             Contract.Ensures(Contract.ForAll(0, a.Length, index => a[index] == v));
+            Contract.Ensures(Contract.ForAll(a, va => va == v));
 
             int i = 0;
             while (i != a.Length)
@@ -102,7 +125,7 @@ namespace ContractIntro
         static void TestSearch()
         {
             int[] a = { 1, 2, 4, 7, 5, 3, 2 };
-            Console.WriteLine(Search(a, 2));
+            Console.WriteLine(Search(a, 45));
             Console.ReadLine();
         }
         /**
@@ -111,7 +134,8 @@ namespace ContractIntro
         **/
         public static int Search(int[] b, int x)
         {
-            Contract.Requires(b != null && Contract.Exists(0, b.Length, j => x == b[j]));
+            Contract.Requires(b != null);
+            Contract.Requires(Contract.Exists(0, b.Length, j => x == b[j]));
 
             // x = b[the result of the function]
             Contract.Ensures(x == b[Contract.Result<int>()]);
@@ -132,6 +156,7 @@ namespace ContractIntro
                     res = i;
                     break;
                 }
+                //b[i] = 0; // the new internship disaster developer....
                 i = i + 1;
 
             }
