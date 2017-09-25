@@ -11,6 +11,7 @@ namespace ContractIntro
     {
         static void Main(string[] args)
         {
+<<<<<<< HEAD
             TestSearch();
             //TestInit();
             //TestReverse();
@@ -38,6 +39,13 @@ namespace ContractIntro
             for (int i = 0; i < a.Length; i++) res += a[i];
             a[0]++;
             return res;
+=======
+            //TestSearch();
+            TestInit();
+            //TestReverse();
+            //TestSwap();
+            //TestGcd();
+>>>>>>> 90c7d8579665f7bf659124f075acc54882378d61
         }
 
         static int Add(int x, int y)
@@ -51,9 +59,9 @@ namespace ContractIntro
         {
 
             int[] aa = new int[30];
-            //init(aa, 4);
-            init(null, 4);
-
+            foreach (int v in CloneAndInit(aa, 34))
+                Console.WriteLine(v);
+            Console.ReadKey();
 
         }
 
@@ -73,6 +81,25 @@ namespace ContractIntro
                 a[i] = v;
                 ++i;
             }
+        }
+
+        /**
+        * Pre: a != null
+        * Post: return a clone of a with v in all cells.
+       **/
+        public static int[] CloneAndInit(int[] a, int v)
+        {
+            Contract.Requires(a != null, "Pre condition not meet!");
+            Contract.Ensures(Contract.Result<int[]>().Length == a.Length);
+            Contract.Ensures(Contract.ForAll(Contract.Result<int[]>(), value => value == v));
+
+            int[] res = new int[a.Length];
+          
+            for (int i=0;  i != a.Length; i++)
+                res[i] = v;
+
+            return res;
+               
         }
 
         static void TestReverse()
