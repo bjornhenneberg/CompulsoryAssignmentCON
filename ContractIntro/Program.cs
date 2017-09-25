@@ -11,7 +11,6 @@ namespace ContractIntro
     {
         static void Main(string[] args)
         {
-<<<<<<< HEAD
             TestSearch();
             //TestInit();
             //TestReverse();
@@ -39,13 +38,6 @@ namespace ContractIntro
             for (int i = 0; i < a.Length; i++) res += a[i];
             a[0]++;
             return res;
-=======
-            //TestSearch();
-            TestInit();
-            //TestReverse();
-            //TestSwap();
-            //TestGcd();
->>>>>>> 90c7d8579665f7bf659124f075acc54882378d61
         }
 
         static int Add(int x, int y)
