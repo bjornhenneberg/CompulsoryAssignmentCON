@@ -48,6 +48,9 @@ namespace ContractIntro
                     case "8":
                         FindLongestMonotoneSegment();
                         break;
+                    case "9":
+                        FindNearestIndexInArray();
+                        break;
                 }
             } while (cki.Key != ConsoleKey.Escape);
 
@@ -68,6 +71,7 @@ namespace ContractIntro
             Console.WriteLine("~~~~~~~~~~~~~~");
             Console.WriteLine("7. ReturnNonTrivialDivisors()");
             Console.WriteLine("8. FindLongestMonotoneSegment()");
+            Console.WriteLine("9. FindNearestIndexInArray()");
             Console.WriteLine();
             Console.WriteLine("Esc. Exit");
             Console.WriteLine();
@@ -389,6 +393,52 @@ namespace ContractIntro
             int[] arr = numbers.ToArray();
 
             return arr;
+        }
+
+
+        //Exercise 3
+        static void FindNearestIndexInArray()
+        {
+            int[] sortedArray = InputArray().OrderBy(x => x).ToArray();
+            Console.Write("Input the number you want to search for: ");
+            int realNumber = Convert.ToInt32(Console.ReadLine());
+
+            var bestIndex = BestIndex(sortedArray, realNumber);
+
+            Console.Write("Your array is: ");
+            int i = 0;
+            foreach (var item in sortedArray)
+            {
+                Console.Write("[" + i + "]=" + item + " ");
+                i++;
+            }
+            Console.WriteLine();
+            Console.WriteLine("The index that is closest to your number is: {0}", bestIndex);
+            Console.ReadLine();
+        }
+
+
+        //Helper method to exercise 3
+        static int BestIndex(int[] sortedArray, int realNumber)
+        {
+            decimal minDistance = 0; //0 is fine here it is never read, it is just to make the compiler happy.
+            int minIndex = -1;
+
+            for (int i = 0; i < sortedArray.Length; i++)
+            {
+                var distance = Math.Abs(realNumber - sortedArray[i]);
+                if (minIndex == -1 || distance < minDistance)
+                {
+                    minDistance = distance;
+                    minIndex = i;
+
+                    //Optional, stop testing if we find a exact match.
+                    if (minDistance == 0)
+                        break;
+                }
+            }
+
+            return minIndex;
         }
     }
 
