@@ -11,18 +11,72 @@ namespace ContractIntro
     {
         static void Main(string[] args)
         {
-            TestSearch();
-            //TestInit();
-            //TestReverse();
-            //TestSwap();
-            //TestGcd();
-            //TestSum();
+            RunMenu();
+        }
+
+        static void RunMenu()
+        {
+            ConsoleKeyInfo cki;
+
+            do
+            {
+                DisplayMenu();
+                cki = Console.ReadKey(false); // show the key as you read it
+                switch (cki.KeyChar.ToString())
+                {
+                    case "1":
+                        TestSearch();
+                        break;
+                    case "2":
+                        TestInit();
+                        break;
+                    case "3":
+                        TestReverse();
+                        break;
+                    case "4":
+                        TestSwap();
+                        break;
+                    case "5":
+                        TestGcd();
+                        break;
+                    case "6":
+                        TestSum();
+                        break;
+                }
+            } while (cki.Key != ConsoleKey.Escape);
+
+        }
+
+        static void DisplayMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("Contract Intro");
+            Console.WriteLine("~~~~~~~~~~~~~~");
+            Console.WriteLine("1. TestSearch()");
+            Console.WriteLine("2. TestInit()");
+            Console.WriteLine("3. TestReverse()");
+            Console.WriteLine("4. TestSwap()");
+            Console.WriteLine("5. TestGcd()");
+            Console.WriteLine("6. TestSum()");
+            Console.WriteLine();
+            Console.WriteLine("~~~~~~~~~~~~~~");
+            Console.WriteLine("Esc. Exit");
         }
 
         static void TestSum()
         {
+            Console.WriteLine(" ~~ Test Sum ~~ ");
             int[] a = { 1, 2, 3, 4, 5 };
-            Console.WriteLine(Sum(a));
+            Console.Write("Initial Array: ");
+            foreach (var item in a)
+            {
+                Console.Write(item + " ");
+            }
+            Console.WriteLine("");
+            Console.Write("Array Sum: ");
+            Console.Write(Sum(a));
+            Console.WriteLine("");
+            Console.WriteLine("Press any key to restart.");
             Console.ReadKey();
         }
         static int Sum(int[] a)
@@ -50,8 +104,8 @@ namespace ContractIntro
         private static void TestInit()
         {
 
-            int[] aa = new int[30];
-            foreach (int v in CloneAndInit(aa, 34))
+            int[] aa = new int[10];
+            foreach (int v in CloneAndInit(aa, 10))
                 Console.WriteLine(v);
             Console.ReadKey();
 
@@ -192,9 +246,18 @@ namespace ContractIntro
 
         public static void TestSwap()
         {
-            int x = 4, y = 2;
+            Console.WriteLine(" ~~ Test Swap ~~ ");
+            Console.Write("Input value x:");
+            int x = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Input value y:");
+            int y = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("x: "+ x + " y:" + y);
+            Console.WriteLine("Swapping...");
             Swap(ref x, ref y);
-            Console.WriteLine(x + " " + y);
+            Console.WriteLine("x: "+x + " y:" + y);
+            Console.WriteLine("Press any key to restart.");
+            Console.ReadKey();
+            
         }
 
         static void TestGcd()
