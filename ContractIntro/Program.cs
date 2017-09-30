@@ -74,10 +74,12 @@ namespace ContractIntro
             Console.WriteLine("5. TestGcd()");
             Console.WriteLine("6. TestSum()");
             Console.WriteLine("~~~~~~~~~~~~~~");
-            Console.WriteLine("7. ReturnNonTrivialDivisors()");
-            Console.WriteLine("8. FindLongestMonotoneSegment()");
-            Console.WriteLine("9. FindNearestIndexInArray()");
-            Console.WriteLine("10. UnionAndFindIntersectOfTwoArrays()");
+            Console.WriteLine();
+            Console.WriteLine("Compulsory Assignment 1");
+            Console.WriteLine("7. Exercise 1");
+            Console.WriteLine("8. Exercise 2");
+            Console.WriteLine("9. Exercise 3");
+            Console.WriteLine("10. Exercise 4");
             Console.WriteLine();
             Console.WriteLine("0. Exit");
             Console.WriteLine();
@@ -461,6 +463,16 @@ namespace ContractIntro
 
         static void Union(int[] arr1, int[] arr2)
         {
+            var union = arr1.Union(arr2);
+
+            foreach (var item in union)
+            {
+                Console.Write(item + " ");
+            }
+        }
+
+        static void UnionManual(int[] arr1, int[] arr2)
+        {
             arr1.OrderBy(x => x).ToArray();
             arr2.OrderBy(x => x).ToArray();
             int m = arr1.Length;
@@ -500,6 +512,16 @@ namespace ContractIntro
         }
 
         static void Intersection(int[] arr1, int[] arr2)
+        {
+            var intersection = arr1.Intersect(arr2);
+
+            foreach (var item in intersection)
+            {
+                Console.Write(item + " ");
+            }
+        }
+
+        static void IntersectionManual(int[] arr1, int[] arr2)
         {
             arr1.OrderBy(x => x).ToArray();
             arr2.OrderBy(x => x).ToArray();
