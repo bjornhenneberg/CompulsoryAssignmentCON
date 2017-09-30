@@ -21,7 +21,7 @@ namespace ContractIntro
             do
             {
                 DisplayMenu();
-                cki = Console.ReadKey(false); // show the key as you read it
+                cki = Console.ReadKey(true); // show the key as you read it
                 switch (cki.KeyChar.ToString())
                 {
                     case "1":
@@ -42,6 +42,9 @@ namespace ContractIntro
                     case "6":
                         TestSum();
                         break;
+                    case "7":
+                        ReturnNonTrivialDivisors();
+                        break;
                 }
             } while (cki.Key != ConsoleKey.Escape);
 
@@ -49,7 +52,8 @@ namespace ContractIntro
 
         static void DisplayMenu()
         {
-            Console.Clear();
+            Console.WriteLine();
+
             Console.WriteLine("Contract Intro");
             Console.WriteLine("~~~~~~~~~~~~~~");
             Console.WriteLine("1. TestSearch()");
@@ -58,9 +62,11 @@ namespace ContractIntro
             Console.WriteLine("4. TestSwap()");
             Console.WriteLine("5. TestGcd()");
             Console.WriteLine("6. TestSum()");
-            Console.WriteLine();
             Console.WriteLine("~~~~~~~~~~~~~~");
+            Console.WriteLine("7. ReturnNonTrivialDivisors()");
+            Console.WriteLine();
             Console.WriteLine("Esc. Exit");
+            Console.WriteLine();
         }
 
         static void TestSum()
@@ -86,8 +92,8 @@ namespace ContractIntro
             // the result is the sum of the numbers in a
 
             // a is not changed
-            Contract.Ensures(Contract.ForAll(0, a.Length, 
-                             idx => a[idx] == Contract.OldValue(a[idx]) ) );
+            Contract.Ensures(Contract.ForAll(0, a.Length,
+                             idx => a[idx] == Contract.OldValue(a[idx])));
             int res = 0;
             for (int i = 0; i < a.Length; i++) res += a[i];
             a[0]++;
@@ -140,12 +146,12 @@ namespace ContractIntro
             Contract.Ensures(Contract.ForAll(Contract.Result<int[]>(), value => value == v));
 
             int[] res = new int[a.Length];
-          
-            for (int i=0;  i != a.Length; i++)
+
+            for (int i = 0; i != a.Length; i++)
                 res[i] = v;
 
             return res;
-               
+
         }
 
         static void TestReverse()
@@ -251,13 +257,13 @@ namespace ContractIntro
             int x = Convert.ToInt32(Console.ReadLine());
             Console.Write("Input value y:");
             int y = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("x: "+ x + " y:" + y);
+            Console.WriteLine("x: " + x + " y:" + y);
             Console.WriteLine("Swapping...");
             Swap(ref x, ref y);
-            Console.WriteLine("x: "+x + " y:" + y);
+            Console.WriteLine("x: " + x + " y:" + y);
             Console.WriteLine("Press any key to restart.");
             Console.ReadKey();
-            
+
         }
 
         static void TestGcd()
@@ -292,11 +298,50 @@ namespace ContractIntro
             Contract.Requires(p > 1);
             Contract.Ensures(Contract.Result<bool>() ==
                 Contract.ForAll(2, p - 1, divisor => p % divisor != 0));
-            
+
             for (int divisor = 2; divisor < p - 2; divisor++)
                 if (p % divisor == 0)
                     return false;
             return true;
+        }
+
+        //Exercise 1
+        static void ReturnNonTrivialDivisors()
+        {
+            
+
+            Console.WriteLine("~~ Return Non Trivial Divisors ~~ ");
+            Console.Write("Input integer: ");
+            int a = Convert.ToInt32(Console.ReadLine());
+            List<int> divisors = GetDivisors(a).ToList();
+            Console.Write("The non-trivial divisors of {0} is:", a);
+            foreach (var item in divisors)
+            {
+                Console.Write(item + " ");
+            }
+            Console.ReadLine();
+        }
+
+        //Helper Method for exercise 1
+        static IEnumerable<int> GetDivisors(int n)
+        {
+            return from a in Enumerable.Range(2, n / 2)
+                   where n % a == 0
+                   select a;
+        }
+
+        static void InputArray()
+        {
+            Console.WriteLine("Input array, seperated by space");
+            var numbers = Console.ReadLine().Split(' ').Select(token => int.Parse(token));
+
+            // if you must have it as an array...
+            int[] arr = numbers.ToArray();
+
+            foreach (var item in arr)
+            {
+                Console.Write(item + " ");
+            }
         }
     }
 
