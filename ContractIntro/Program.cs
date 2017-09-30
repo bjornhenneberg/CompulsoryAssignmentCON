@@ -16,14 +16,16 @@ namespace ContractIntro
 
         static void RunMenu()
         {
-            ConsoleKeyInfo cki;
-
+            var running = true;
             do
             {
                 DisplayMenu();
-                cki = Console.ReadKey(true); // show the key as you read it
-                switch (cki.KeyChar.ToString())
+                var input = Convert.ToInt32(Console.ReadLine());
+                switch (input.ToString())
                 {
+                    case "0":
+                        running = false;
+                        break;
                     case "1":
                         TestSearch();
                         break;
@@ -51,8 +53,11 @@ namespace ContractIntro
                     case "9":
                         FindNearestIndexInArray();
                         break;
+                    case "10":
+                        UnionAndFindIntersectOfTwoArrays();
+                        break;
                 }
-            } while (cki.Key != ConsoleKey.Escape);
+            } while (running);
 
         }
 
@@ -72,8 +77,9 @@ namespace ContractIntro
             Console.WriteLine("7. ReturnNonTrivialDivisors()");
             Console.WriteLine("8. FindLongestMonotoneSegment()");
             Console.WriteLine("9. FindNearestIndexInArray()");
+            Console.WriteLine("10. UnionAndFindIntersectOfTwoArrays()");
             Console.WriteLine();
-            Console.WriteLine("Esc. Exit");
+            Console.WriteLine("0. Exit");
             Console.WriteLine();
         }
 
@@ -362,11 +368,9 @@ namespace ContractIntro
             for (var i = 0; i < values.Length; i++)
             {
                 if (i == (values.Length - 1)) //End edge case
-                {
-                    
+                {                    
                         currentSequence++;
-                        sequenceCounts.Add(currentSequence);
-                    
+                        sequenceCounts.Add(currentSequence);                    
                 }
                 else if ((values[i]) < values[i + 1])
                 {
@@ -439,6 +443,82 @@ namespace ContractIntro
             }
 
             return minIndex;
+        }
+
+        static void UnionAndFindIntersectOfTwoArrays()
+        {
+            int[] arr1 = InputArray();
+            Console.WriteLine();
+            int[] arr2 = InputArray();
+
+            Console.WriteLine("Union of your arrays.");
+            Union(arr1, arr2);
+            Console.WriteLine();
+            Console.WriteLine("Intersects of your arrays.");
+            Intersection(arr1, arr2);
+            Console.ReadLine();
+        }
+
+        static void Union(int[] arr1, int[] arr2)
+        {
+            arr1.OrderBy(x => x).ToArray();
+            arr2.OrderBy(x => x).ToArray();
+            int m = arr1.Length;
+            int n = arr2.Length;
+
+            int i = 0, j = 0;
+
+            int[] union = new int[100];
+            int[] intersect = new int[100];
+
+            while (i < m && j < n)
+            {
+                if (arr1[i] < arr2[j])
+                {
+                    Console.Write("{0} ", arr1[i++]);
+                }
+                else if (arr2[j] < arr1[i])
+                {
+                    Console.Write("{0} ", arr2[j++]);
+                }
+                else /* if arr1[i] == arr2[j] */
+                {
+                    Console.Write("{0} ", arr2[j++]);
+                    i++;
+                }
+            }
+
+            /* Print remaining elements of the larger array */
+            while (i < m)
+            { 
+                Console.Write("{0} ", arr1[i++]);
+            }
+            while (j < n)
+            { 
+                Console.Write("{0} ", arr2[j++]);
+            }
+        }
+
+        static void Intersection(int[] arr1, int[] arr2)
+        {
+            arr1.OrderBy(x => x).ToArray();
+            arr2.OrderBy(x => x).ToArray();
+            int m = arr1.Length;
+            int n = arr2.Length;
+
+            int i = 0, j = 0;
+            while (i < m && j < n)
+            {
+                if (arr1[i] < arr2[j])
+                    i++;
+                else if (arr2[j] < arr1[i])
+                    j++;
+                else /* if arr1[i] == arr2[j] */
+                {
+                    Console.Write("{0} ", arr2[j++]);
+                    i++;
+                }
+            }
         }
     }
 
