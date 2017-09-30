@@ -92,7 +92,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>25490C62B7D3E46D81965FC6DAE49B126CDDA881</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>E8D340C99538AF52573533C7CBFC11408A36E130</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>ContractIntro_TemporaryKey.pfx</ManifestKeyFile>
@@ -113,6 +113,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comp1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

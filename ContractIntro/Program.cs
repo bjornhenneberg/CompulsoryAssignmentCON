@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace ContractIntro
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
             RunMenu();
         }
 
-        static void RunMenu()
+        public static void RunMenu()
         {
             var running = true;
             do
@@ -25,36 +25,10 @@ namespace ContractIntro
                 {
                     case "0":
                         running = false;
+                        Environment.Exit(0);
                         break;
-                    //case "1":
-                    //    TestSearch();
-                    //    break;
-                    //case "2":
-                    //    TestInit();
-                    //    break;
-                    //case "3":
-                    //    TestReverse();
-                    //    break;
-                    //case "4":
-                    //    TestSwap();
-                    //    break;
-                    //case "5":
-                    //    TestGcd();
-                    //    break;
-                    //case "6":
-                    //    TestSum();
-                    //    break;
                     case "1":
-                        ReturnNonTrivialDivisors();
-                        break;
-                    case "2":
-                        FindLongestMonotoneSegment();
-                        break;
-                    case "3":
-                        FindNearestIndexInArray();
-                        break;
-                    case "4":
-                        UnionAndFindIntersectOfTwoArrays();
+                        new Comp1().RunMenu();
                         break;
                 }
             } while (running);
@@ -64,25 +38,34 @@ namespace ContractIntro
         static void DisplayMenu()
         {
             Console.WriteLine();
-
-            //Console.WriteLine("| Contract Intro");
-            //Console.WriteLine("| [1] TestSearch()");
-            //Console.WriteLine("| [2] TestInit()");
-            //Console.WriteLine("| [3] TestReverse()");
-            //Console.WriteLine("| [4] TestSwap()");
-            //Console.WriteLine("| [5] TestGcd()");
-            //Console.WriteLine("| [6] TestSum()");
-            //Console.WriteLine("|");
-            //Console.WriteLine("|");
             Console.WriteLine("| Compulsory Assignment 1");
-            Console.WriteLine("| [1] Exercise 1 - Non-trivial divisors.");
-            Console.WriteLine("| [2] Exercise 2 - Longest sequence in array.");
-            Console.WriteLine("| [3] Exercise 3 - Nearest Index to value in array.");
-            Console.WriteLine("| [4] Exercise 4 - Intersect and Union of two Arrays.");
+            Console.WriteLine("| [1] Compulsory Assignment 1");
             Console.WriteLine("|");
             Console.WriteLine("| [0] Exit");
             Console.WriteLine();
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*   Contract Intro   */
 
         static void TestSum()
         {
