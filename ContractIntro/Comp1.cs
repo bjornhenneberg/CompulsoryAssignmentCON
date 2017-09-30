@@ -82,15 +82,26 @@ namespace ContractIntro
         /// </summary>
         /// <param name="n">The given int to find the divisors for</param>
         /// <returns>an array containing the divisors for the given int</returns>
-        public IEnumerable<int> GetDivisors(int n)
+        /*
+         Pre:
+         a > 1
+         
+         Post:
+         P(x):y(1<y<x  x mod y  0  yresult)
+         and z(1<z<x  x mod y  0  zresult) 
+             */
+        public int[] GetDivisors(int n)
         {
             Contract.Requires(n > 1);
+            Contract.Ensures(Contract.ForAll(Contract.Result<int[]>(),
+                value => n % value == 0 && value > 1 && value < n));
+            Contract.Ensures(Contract.ForAll(2, n,
+                idx => (n % idx == 0) == Contract.Result<int[]>().Contains(idx)));
 
             var divisors = from a in Enumerable.Range(2, n / 2)
                            where n % a == 0
                            select a;
-            Contract.Ensures(divisors.Count() < 1);
-            return divisors;
+            return divisors.ToArray();
         }
 
         //Exercise 2
