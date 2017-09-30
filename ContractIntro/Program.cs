@@ -306,7 +306,7 @@ namespace ContractIntro
         }
 
         //Exercise 1
-        static void ReturnNonTrivialDivisors()
+        static int[] ReturnNonTrivialDivisors()
         {
             
 
@@ -314,20 +314,25 @@ namespace ContractIntro
             Console.Write("Input integer: ");
             int a = Convert.ToInt32(Console.ReadLine());
             List<int> divisors = GetDivisors(a).ToList();
-            Console.Write("The non-trivial divisors of {0} is:", a);
+            Console.Write("The non-trivial divisors of {0} is: ", a);
             foreach (var item in divisors)
             {
                 Console.Write(item + " ");
             }
             Console.ReadLine();
+            return divisors.ToArray();
         }
 
         //Helper Method for exercise 1
         static IEnumerable<int> GetDivisors(int n)
         {
-            return from a in Enumerable.Range(2, n / 2)
+            Contract.Requires(n < 1);
+            
+            var divisors = from a in Enumerable.Range(2, n / 2)
                    where n % a == 0
                    select a;
+            Contract.Ensures(divisors.Count() < 1);
+            return divisors;
         }
 
         static void InputArray()
