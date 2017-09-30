@@ -40,6 +40,9 @@ namespace ContractIntro
 
         }
 
+        /// <summary>
+        /// Simply displays the menu - purely visual
+        /// </summary>
         public void DisplayMenu()
         {
             Console.WriteLine();
@@ -54,6 +57,10 @@ namespace ContractIntro
         }
 
         //Exercise 1
+        /// <summary>
+        /// Returns the non-trivial divisors of an int
+        /// </summary>
+        /// <returns>Array containing the trivial divisors of the given int</returns>
         public int[] ReturnNonTrivialDivisors()
         {
             Console.WriteLine("~~ Return Non Trivial Divisors ~~ ");
@@ -70,6 +77,11 @@ namespace ContractIntro
         }
 
         //Helper Method for exercise 1
+        /// <summary>
+        /// Find the divisors for a given int and returns them as an int[]
+        /// </summary>
+        /// <param name="n">The given int to find the divisors for</param>
+        /// <returns>an array containing the divisors for the given int</returns>
         public IEnumerable<int> GetDivisors(int n)
         {
             Contract.Requires(n > 1);
@@ -82,6 +94,9 @@ namespace ContractIntro
         }
 
         //Exercise 2
+        /// <summary>
+        /// Find the longest continous sequence in an int array
+        /// </summary>
         public void FindLongestMonotoneSegment()
         {
             Console.WriteLine("~~ Find Longest Monotone Segment From Array ~~");
@@ -93,6 +108,12 @@ namespace ContractIntro
         }
 
         //Helper method to exercise 2
+        /// <summary>
+        /// The method containing the logic for exercise 2
+        /// Finding the longest continous sequence in an int array
+        /// </summary>
+        /// <param name="values">The given int array</param>
+        /// <returns>The length of the longest continous sequence</returns>
         public int HighestSequence(int[] values)
         {
             IList<int> sequenceCounts = new List<int>();
@@ -122,6 +143,10 @@ namespace ContractIntro
         }
 
         //Helper method to input an array and return it
+        /// <summary>
+        /// Helper method for reading an int array since that was used alot
+        /// </summary>
+        /// <returns>the int array that you typed in</returns>
         public int[] InputArray()
         {
             Console.WriteLine("Input array, seperated by space");
@@ -135,6 +160,9 @@ namespace ContractIntro
 
 
         //Exercise 3
+        /// <summary>
+        /// Find the 'best' index in an array compared to an int
+        /// </summary>
         public void FindNearestIndexInArray()
         {
             Console.WriteLine("~~ Find Nearest Index to value in Array ~~ ");
@@ -158,6 +186,12 @@ namespace ContractIntro
 
 
         //Helper method to exercise 3
+        /// <summary>
+        /// Find the index of the closest value to the given int in the given array
+        /// </summary>
+        /// <param name="sortedArray">the given array sorted</param>
+        /// <param name="realNumber">the given number</param>
+        /// <returns>the best index (the one closest to the given int)</returns>
         public int BestIndex(int[] sortedArray, int realNumber)
         {
             decimal minDistance = 0; //0 is fine here it is never read, it is just to make the compiler happy.
@@ -181,6 +215,9 @@ namespace ContractIntro
         }
 
         //Exercise 4
+        /// <summary>
+        /// Make a union and find the intersects of to int[]s
+        /// </summary>
         public void UnionAndFindIntersectOfTwoArrays()
         {
             Console.WriteLine("~~ Find Intersect and Union of two arrays ~~");
@@ -197,6 +234,11 @@ namespace ContractIntro
         }
 
         //Helper method for exercise 4 - union
+        /// <summary>
+        /// The built in union function
+        /// </summary>
+        /// <param name="arr1">the first array</param>
+        /// <param name="arr2">the second array</param>
         public void Union(int[] arr1, int[] arr2)
         {
             var union = arr1.Union(arr2);
@@ -208,6 +250,11 @@ namespace ContractIntro
         }
 
         //Helper method for exercise 4 - union
+        /// <summary>
+        /// A manual union (and sorted, wasnt sure which you meant)
+        /// </summary>
+        /// <param name="arr1">first array</param>
+        /// <param name="arr2">second array</param>
         public void UnionManual(int[] arr1, int[] arr2)
         {
             arr1.OrderBy(x => x).ToArray();
@@ -249,6 +296,11 @@ namespace ContractIntro
         }
 
         //Helper method for exercise 4 - Intersection
+        /// <summary>
+        /// The built in intersection function
+        /// </summary>
+        /// <param name="arr1">first array</param>
+        /// <param name="arr2">second array</param>
         public void Intersection(int[] arr1, int[] arr2)
         {
             var intersection = arr1.Intersect(arr2);
@@ -260,6 +312,11 @@ namespace ContractIntro
         }
 
         //Helper method for exercise 4 - Intersection
+        /// <summary>
+        /// Manual intersection (and sorted), wasnt sure which one you wanted
+        /// </summary>
+        /// <param name="arr1">first array</param>
+        /// <param name="arr2">second array</param>
         public void IntersectionManual(int[] arr1, int[] arr2)
         {
             arr1.OrderBy(x => x).ToArray();
