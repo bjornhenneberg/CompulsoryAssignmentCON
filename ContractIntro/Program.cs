@@ -45,6 +45,9 @@ namespace ContractIntro
                     case "7":
                         ReturnNonTrivialDivisors();
                         break;
+                    case "8":
+                        FindLongestMonotoneSegment();
+                        break;
                 }
             } while (cki.Key != ConsoleKey.Escape);
 
@@ -64,6 +67,7 @@ namespace ContractIntro
             Console.WriteLine("6. TestSum()");
             Console.WriteLine("~~~~~~~~~~~~~~");
             Console.WriteLine("7. ReturnNonTrivialDivisors()");
+            Console.WriteLine("8. FindLongestMonotoneSegment()");
             Console.WriteLine();
             Console.WriteLine("Esc. Exit");
             Console.WriteLine();
@@ -326,7 +330,7 @@ namespace ContractIntro
         //Helper Method for exercise 1
         static IEnumerable<int> GetDivisors(int n)
         {
-            Contract.Requires(n < 1);
+            Contract.Requires(n > 1);
             
             var divisors = from a in Enumerable.Range(2, n / 2)
                    where n % a == 0
@@ -335,7 +339,48 @@ namespace ContractIntro
             return divisors;
         }
 
-        static void InputArray()
+        //Exercise 2
+        static void FindLongestMonotoneSegment()
+        {
+            Console.WriteLine("~~ Find Longest Monotone Segment From Array ~~");
+            int[] array = InputArray();
+
+            var highestlenght = HighestSequence(array);
+            Console.WriteLine("The longest sequence is: {0}", highestlenght);
+            Console.ReadKey();
+        }
+
+        static int HighestSequence(int[] values)
+        {
+            IList<int> sequenceCounts = new List<int>();
+
+            var currentSequence = 0;
+            for (var i = 0; i < values.Length; i++)
+            {
+                if (i == (values.Length - 1)) //End edge case
+                {
+                    
+                        currentSequence++;
+                        sequenceCounts.Add(currentSequence);
+                    
+                }
+                else if ((values[i]) < values[i + 1])
+                {
+                    currentSequence++;
+                }
+                else
+                {
+                    currentSequence++;
+                    sequenceCounts.Add(currentSequence);
+                    currentSequence = 0;
+                    continue;
+                }
+                sequenceCounts.Add(currentSequence);
+            }
+            return sequenceCounts.Max();
+        }
+
+        static int[] InputArray()
         {
             Console.WriteLine("Input array, seperated by space");
             var numbers = Console.ReadLine().Split(' ').Select(token => int.Parse(token));
@@ -343,10 +388,7 @@ namespace ContractIntro
             // if you must have it as an array...
             int[] arr = numbers.ToArray();
 
-            foreach (var item in arr)
-            {
-                Console.Write(item + " ");
-            }
+            return arr;
         }
     }
 
