@@ -26,34 +26,34 @@ namespace ContractIntro
                     case "0":
                         running = false;
                         break;
+                    //case "1":
+                    //    TestSearch();
+                    //    break;
+                    //case "2":
+                    //    TestInit();
+                    //    break;
+                    //case "3":
+                    //    TestReverse();
+                    //    break;
+                    //case "4":
+                    //    TestSwap();
+                    //    break;
+                    //case "5":
+                    //    TestGcd();
+                    //    break;
+                    //case "6":
+                    //    TestSum();
+                    //    break;
                     case "1":
-                        TestSearch();
-                        break;
-                    case "2":
-                        TestInit();
-                        break;
-                    case "3":
-                        TestReverse();
-                        break;
-                    case "4":
-                        TestSwap();
-                        break;
-                    case "5":
-                        TestGcd();
-                        break;
-                    case "6":
-                        TestSum();
-                        break;
-                    case "7":
                         ReturnNonTrivialDivisors();
                         break;
-                    case "8":
+                    case "2":
                         FindLongestMonotoneSegment();
                         break;
-                    case "9":
+                    case "3":
                         FindNearestIndexInArray();
                         break;
-                    case "10":
+                    case "4":
                         UnionAndFindIntersectOfTwoArrays();
                         break;
                 }
@@ -65,23 +65,22 @@ namespace ContractIntro
         {
             Console.WriteLine();
 
-            Console.WriteLine("Contract Intro");
-            Console.WriteLine("~~~~~~~~~~~~~~");
-            Console.WriteLine("1. TestSearch()");
-            Console.WriteLine("2. TestInit()");
-            Console.WriteLine("3. TestReverse()");
-            Console.WriteLine("4. TestSwap()");
-            Console.WriteLine("5. TestGcd()");
-            Console.WriteLine("6. TestSum()");
-            Console.WriteLine("~~~~~~~~~~~~~~");
-            Console.WriteLine();
-            Console.WriteLine("Compulsory Assignment 1");
-            Console.WriteLine("7. Exercise 1");
-            Console.WriteLine("8. Exercise 2");
-            Console.WriteLine("9. Exercise 3");
-            Console.WriteLine("10. Exercise 4");
-            Console.WriteLine();
-            Console.WriteLine("0. Exit");
+            //Console.WriteLine("| Contract Intro");
+            //Console.WriteLine("| [1] TestSearch()");
+            //Console.WriteLine("| [2] TestInit()");
+            //Console.WriteLine("| [3] TestReverse()");
+            //Console.WriteLine("| [4] TestSwap()");
+            //Console.WriteLine("| [5] TestGcd()");
+            //Console.WriteLine("| [6] TestSum()");
+            //Console.WriteLine("|");
+            //Console.WriteLine("|");
+            Console.WriteLine("| Compulsory Assignment 1");
+            Console.WriteLine("| [1] Exercise 1 - Non-trivial divisors.");
+            Console.WriteLine("| [2] Exercise 2 - Longest sequence in array.");
+            Console.WriteLine("| [3] Exercise 3 - Nearest Index to value in array.");
+            Console.WriteLine("| [4] Exercise 4 - Intersect and Union of two Arrays.");
+            Console.WriteLine("|");
+            Console.WriteLine("| [0] Exit");
             Console.WriteLine();
         }
 
@@ -321,11 +320,11 @@ namespace ContractIntro
             return true;
         }
 
+        /* Compolsory Assignment 1*/
+
         //Exercise 1
         static int[] ReturnNonTrivialDivisors()
         {
-            
-
             Console.WriteLine("~~ Return Non Trivial Divisors ~~ ");
             Console.Write("Input integer: ");
             int a = Convert.ToInt32(Console.ReadLine());
@@ -343,10 +342,10 @@ namespace ContractIntro
         static IEnumerable<int> GetDivisors(int n)
         {
             Contract.Requires(n > 1);
-            
+
             var divisors = from a in Enumerable.Range(2, n / 2)
-                   where n % a == 0
-                   select a;
+                           where n % a == 0
+                           select a;
             Contract.Ensures(divisors.Count() < 1);
             return divisors;
         }
@@ -362,6 +361,7 @@ namespace ContractIntro
             Console.ReadKey();
         }
 
+        //Helper method to exercise 2
         static int HighestSequence(int[] values)
         {
             IList<int> sequenceCounts = new List<int>();
@@ -370,9 +370,9 @@ namespace ContractIntro
             for (var i = 0; i < values.Length; i++)
             {
                 if (i == (values.Length - 1)) //End edge case
-                {                    
-                        currentSequence++;
-                        sequenceCounts.Add(currentSequence);                    
+                {
+                    currentSequence++;
+                    sequenceCounts.Add(currentSequence);
                 }
                 else if ((values[i]) < values[i + 1])
                 {
@@ -390,6 +390,7 @@ namespace ContractIntro
             return sequenceCounts.Max();
         }
 
+        //Helper method to input an array and return it
         static int[] InputArray()
         {
             Console.WriteLine("Input array, seperated by space");
@@ -405,6 +406,7 @@ namespace ContractIntro
         //Exercise 3
         static void FindNearestIndexInArray()
         {
+            Console.WriteLine("~~ Find Nearest Index to value in Array ~~ ");
             int[] sortedArray = InputArray().OrderBy(x => x).ToArray();
             Console.Write("Input the number you want to search for: ");
             int realNumber = Convert.ToInt32(Console.ReadLine());
@@ -447,8 +449,10 @@ namespace ContractIntro
             return minIndex;
         }
 
+        //Exercise 4
         static void UnionAndFindIntersectOfTwoArrays()
         {
+            Console.WriteLine("~~ Find Intersect and Union of two arrays ~~");
             int[] arr1 = InputArray();
             Console.WriteLine();
             int[] arr2 = InputArray();
@@ -461,6 +465,7 @@ namespace ContractIntro
             Console.ReadLine();
         }
 
+        //Helper method for exercise 4 - union
         static void Union(int[] arr1, int[] arr2)
         {
             var union = arr1.Union(arr2);
@@ -471,6 +476,7 @@ namespace ContractIntro
             }
         }
 
+        //Helper method for exercise 4 - union
         static void UnionManual(int[] arr1, int[] arr2)
         {
             arr1.OrderBy(x => x).ToArray();
@@ -502,15 +508,16 @@ namespace ContractIntro
 
             /* Print remaining elements of the larger array */
             while (i < m)
-            { 
+            {
                 Console.Write("{0} ", arr1[i++]);
             }
             while (j < n)
-            { 
+            {
                 Console.Write("{0} ", arr2[j++]);
             }
         }
 
+        //Helper method for exercise 4 - Intersection
         static void Intersection(int[] arr1, int[] arr2)
         {
             var intersection = arr1.Intersect(arr2);
@@ -521,6 +528,7 @@ namespace ContractIntro
             }
         }
 
+        //Helper method for exercise 4 - Intersection
         static void IntersectionManual(int[] arr1, int[] arr2)
         {
             arr1.OrderBy(x => x).ToArray();
