@@ -205,7 +205,7 @@ namespace ContractIntro
         /// <returns>the best index (the one closest to the given int)</returns>
         public int BestIndex(int[] sortedArray, int realNumber)
         {
-            decimal minDistance = 0; //0 is fine here it is never read, it is just to make the compiler happy.
+            decimal minDistance = 0;
             int minIndex = -1;
 
             for (int i = 0; i < sortedArray.Length; i++)
@@ -216,7 +216,6 @@ namespace ContractIntro
                     minDistance = distance;
                     minIndex = i;
 
-                    //Optional, stop testing if we find a exact match.
                     if (minDistance == 0)
                         break;
                 }
