@@ -93,8 +93,9 @@ namespace CompulsoryAssignment
         public int[] GetDivisors(int n)
         {
             Contract.Requires(n > 1);
-            Contract.Ensures(Contract.ForAll(Contract.Result<int[]>(),
-                value => n % value == 0 && value > 1 && value < n));
+            Contract.Ensures(
+                Contract.ForAll(Contract.Result<int[]>(), value => n % value == 0 && value > 1 && value < n));
+
             Contract.Ensures(Contract.ForAll(2, n,
                 idx => (n % idx == 0) == Contract.Result<int[]>().Contains(idx)));
 
@@ -205,6 +206,12 @@ namespace CompulsoryAssignment
         /// <returns>the best index (the one closest to the given int)</returns>
         public int BestIndex(int[] sortedArray, int realNumber)
         {
+            Contract.Requires(sortedArray.Length > 1 && realNumber > 0);
+
+            Contract.Ensures(
+                Contract.ForAll(0, sortedArray.Length - 1, 
+                    x => Math.Abs(sortedArray[x] - realNumber) >= Math.Abs(Contract.Result<int>() - realNumber)));
+
             decimal minDistance = 0;
             int minIndex = -1;
 
@@ -251,6 +258,8 @@ namespace CompulsoryAssignment
         /// <param name="arr2">the second array</param>
         public int[] Union(int[] arr1, int[] arr2)
         {
+            Contract.Requires(arr1.Length > 1 && arr2.Length > 1);
+            
             var union = arr1.Union(arr2).OrderBy(x => x).ToArray();
 
             foreach (var item in union)
@@ -269,6 +278,8 @@ namespace CompulsoryAssignment
         /// <param name="arr2">second array</param>
         public void UnionManual(int[] arr1, int[] arr2)
         {
+            Contract.Requires(arr1.Length > 1 && arr2.Length > 1);
+
             arr1.OrderBy(x => x).ToArray();
             arr2.OrderBy(x => x).ToArray();
             int m = arr1.Length;
@@ -315,6 +326,8 @@ namespace CompulsoryAssignment
         /// <param name="arr2">second array</param>
         public int[] Intersection(int[] arr1, int[] arr2)
         {
+            Contract.Requires(arr1.Length > 1 && arr2.Length > 1);
+
             var intersection = arr1.Intersect(arr2).OrderBy(x => x).ToArray();
 
             foreach (var item in intersection)
@@ -333,6 +346,8 @@ namespace CompulsoryAssignment
         /// <param name="arr2">second array</param>
         public void IntersectionManual(int[] arr1, int[] arr2)
         {
+            Contract.Requires(arr1.Length > 1 && arr2.Length > 1);
+
             arr1.OrderBy(x => x).ToArray();
             arr2.OrderBy(x => x).ToArray();
             int m = arr1.Length;
