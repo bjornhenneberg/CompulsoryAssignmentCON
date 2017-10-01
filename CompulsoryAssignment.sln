@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContractIntro", "ContractIntro\ContractIntro.csproj", "{8D9F2590-8A5C-4327-9E85-EC9B5B8DE08D}"
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompulsoryAssignment", "ContractIntro\CompulsoryAssignment.csproj", "{8D9F2590-8A5C-4327-9E85-EC9B5B8DE08D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,5 +18,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {84610B57-A8B4-498D-B5B3-9008F740D08A}
 	EndGlobalSection
 EndGlobal

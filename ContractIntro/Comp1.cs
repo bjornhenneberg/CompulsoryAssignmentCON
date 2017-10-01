@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ContractIntro
+namespace CompulsoryAssignment
 {
     public class Comp1
     {
@@ -18,21 +18,21 @@ namespace ContractIntro
             {
                 DisplayMenu();
                 var input = Convert.ToInt32(Console.ReadLine());
-                switch (input.ToString())
+                switch (input)
                 {
-                    case "0":
+                    case 0:
                         Program.RunMenu();
                         break;
-                    case "1":
+                    case 1:
                         ReturnNonTrivialDivisors();
                         break;
-                    case "2":
+                    case 2:
                         FindLongestMonotoneSegment();
                         break;
-                    case "3":
+                    case 3:
                         FindNearestIndexInArray();
                         break;
-                    case "4":
+                    case 4:
                         UnionAndFindIntersectOfTwoArrays();
                         break;
                 }
@@ -249,14 +249,16 @@ namespace ContractIntro
         /// </summary>
         /// <param name="arr1">the first array</param>
         /// <param name="arr2">the second array</param>
-        public void Union(int[] arr1, int[] arr2)
+        public int[] Union(int[] arr1, int[] arr2)
         {
-            var union = arr1.Union(arr2);
+            var union = arr1.Union(arr2).OrderBy(x => x).ToArray();
 
             foreach (var item in union)
             {
                 Console.Write(item + " ");
             }
+
+            return union;
         }
 
         //Helper method for exercise 4 - union
@@ -311,14 +313,16 @@ namespace ContractIntro
         /// </summary>
         /// <param name="arr1">first array</param>
         /// <param name="arr2">second array</param>
-        public void Intersection(int[] arr1, int[] arr2)
+        public int[] Intersection(int[] arr1, int[] arr2)
         {
-            var intersection = arr1.Intersect(arr2);
+            var intersection = arr1.Intersect(arr2).OrderBy(x => x).ToArray();
 
             foreach (var item in intersection)
             {
                 Console.Write(item + " ");
             }
+
+            return intersection;
         }
 
         //Helper method for exercise 4 - Intersection

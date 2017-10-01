@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ContractIntro
+namespace CompulsoryAssignment
 {
     public class Program
     {
@@ -21,13 +21,13 @@ namespace ContractIntro
             {
                 DisplayMenu();
                 var input = Convert.ToInt32(Console.ReadLine());
-                switch (input.ToString())
+                switch (input)
                 {
-                    case "0":
+                    case 0:
                         running = false;
                         Environment.Exit(0);
                         break;
-                    case "1":
+                    case 1:
                         new Comp1().RunMenu();
                         break;
                 }
