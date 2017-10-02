@@ -92,10 +92,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>E8D340C99538AF52573533C7CBFC11408A36E130</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>5EC203EA73516676DB0BE7879A9479CF7F63CDE7</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>ContractIntro_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>CompulsoryAssignment_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -105,6 +105,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Debug Console.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -122,6 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="CompulsoryAssignment_TemporaryKey.pfx" />
     <None Include="ContractIntro_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -133,7 +137,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Debug Console.ico" />
-    <Content Include="Executable\Compulsory 01.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
