@@ -45,6 +45,7 @@ namespace CompulsoryAssignment
         /// </summary>
         public void DisplayMenu()
         {
+            Console.Clear();
             Console.WriteLine();
             Console.WriteLine("| Compulsory Assignment 1");
             Console.WriteLine("| [1] Exercise 1 - Non-trivial divisors.");
@@ -128,6 +129,10 @@ namespace CompulsoryAssignment
         /// <returns>The length of the longest continous sequence</returns>
         public int HighestSequence(int[] values)
         {
+            Contract.Requires(values.Length > 1 );
+            Contract.Ensures(
+                Contract.Result<int>() <= values.Length);
+
             IList<int> sequenceCounts = new List<int>();
 
             var currentSequence = 0;
@@ -153,24 +158,7 @@ namespace CompulsoryAssignment
             }
             return sequenceCounts.Max();
         }
-
-        //Helper method to input an array and return it
-        /// <summary>
-        /// Helper method for reading an int array since that was used alot
-        /// </summary>
-        /// <returns>the int array that you typed in</returns>
-        public int[] InputArray()
-        {
-            Console.WriteLine("Input array, seperated by space");
-            var numbers = Console.ReadLine().Trim().Split(' ').Select(token => Int32.Parse(token));
-
-            // if you must have it as an array...
-            int[] arr = numbers.ToArray();
-
-            return arr;
-        }
-
-
+        
         //Exercise 3
         /// <summary>
         /// Find the 'best' index in an array compared to an int
@@ -207,10 +195,10 @@ namespace CompulsoryAssignment
         public int BestIndex(int[] sortedArray, int realNumber)
         {
             Contract.Requires(sortedArray.Length > 1 && realNumber > 0);
-
             Contract.Ensures(
-                Contract.ForAll(0, sortedArray.Length - 1, 
-                    x => Math.Abs(sortedArray[x] - realNumber) >= Math.Abs(Contract.Result<int>() - realNumber)));
+                Contract.Result<int>() < sortedArray.Length);
+            Contract.Ensures(
+                Contract.Exists(0, sortedArray.Length, x => sortedArray[x] > 0));
 
             decimal minDistance = 0;
             int minIndex = -1;
@@ -259,7 +247,9 @@ namespace CompulsoryAssignment
         public int[] Union(int[] arr1, int[] arr2)
         {
             Contract.Requires(arr1.Length > 1 && arr2.Length > 1);
-            
+            Contract.Ensures(
+                Contract.Result<int[]>().Length >= arr1.Length && Contract.Result<int[]>().Length >= arr2.Length );
+
             var union = arr1.Union(arr2).OrderBy(x => x).ToArray();
 
             foreach (var item in union)
@@ -268,54 +258,6 @@ namespace CompulsoryAssignment
             }
 
             return union;
-        }
-
-        //Helper method for exercise 4 - union
-        /// <summary>
-        /// A manual union (and sorted, wasnt sure which you meant)
-        /// </summary>
-        /// <param name="arr1">first array</param>
-        /// <param name="arr2">second array</param>
-        public void UnionManual(int[] arr1, int[] arr2)
-        {
-            Contract.Requires(arr1.Length > 1 && arr2.Length > 1);
-
-            arr1.OrderBy(x => x).ToArray();
-            arr2.OrderBy(x => x).ToArray();
-            int m = arr1.Length;
-            int n = arr2.Length;
-
-            int i = 0, j = 0;
-
-            int[] union = new int[100];
-            int[] intersect = new int[100];
-
-            while (i < m && j < n)
-            {
-                if (arr1[i] < arr2[j])
-                {
-                    Console.Write("{0} ", arr1[i++]);
-                }
-                else if (arr2[j] < arr1[i])
-                {
-                    Console.Write("{0} ", arr2[j++]);
-                }
-                else /* if arr1[i] == arr2[j] */
-                {
-                    Console.Write("{0} ", arr2[j++]);
-                    i++;
-                }
-            }
-
-            /* Print remaining elements of the larger array */
-            while (i < m)
-            {
-                Console.Write("{0} ", arr1[i++]);
-            }
-            while (j < n)
-            {
-                Console.Write("{0} ", arr2[j++]);
-            }
         }
 
         //Helper method for exercise 4 - Intersection
@@ -327,6 +269,8 @@ namespace CompulsoryAssignment
         public int[] Intersection(int[] arr1, int[] arr2)
         {
             Contract.Requires(arr1.Length > 1 && arr2.Length > 1);
+            Contract.Ensures(
+                Contract.Result<int[]>().Length <= arr1.Length && Contract.Result<int[]>().Length <= arr2.Length);
 
             var intersection = arr1.Intersect(arr2).OrderBy(x => x).ToArray();
 
@@ -338,34 +282,20 @@ namespace CompulsoryAssignment
             return intersection;
         }
 
-        //Helper method for exercise 4 - Intersection
+        //Helper method to input an array and return it
         /// <summary>
-        /// Manual intersection (and sorted), wasnt sure which one you wanted
+        /// Helper method for reading an int array since that was used alot
         /// </summary>
-        /// <param name="arr1">first array</param>
-        /// <param name="arr2">second array</param>
-        public void IntersectionManual(int[] arr1, int[] arr2)
+        /// <returns>the int array that you typed in</returns>
+        public int[] InputArray()
         {
-            Contract.Requires(arr1.Length > 1 && arr2.Length > 1);
+            Console.WriteLine("Input array, seperated by space");
+            var numbers = Console.ReadLine().Trim().Split(' ').Select(token => Int32.Parse(token));
 
-            arr1.OrderBy(x => x).ToArray();
-            arr2.OrderBy(x => x).ToArray();
-            int m = arr1.Length;
-            int n = arr2.Length;
+            // if you must have it as an array...
+            int[] arr = numbers.ToArray();
 
-            int i = 0, j = 0;
-            while (i < m && j < n)
-            {
-                if (arr1[i] < arr2[j])
-                    i++;
-                else if (arr2[j] < arr1[i])
-                    j++;
-                else /* if arr1[i] == arr2[j] */
-                {
-                    Console.Write("{0} ", arr2[j++]);
-                    i++;
-                }
-            }
+            return arr;
         }
     }
 }
