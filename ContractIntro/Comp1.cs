@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CompulsoryAssignment
+namespace ContractIntro
 {
     public class Comp1
     {
@@ -127,11 +127,16 @@ namespace CompulsoryAssignment
         /// </summary>
         /// <param name="values">The given int array</param>
         /// <returns>The length of the longest continous sequence</returns>
+        /// 
+        /// Post: n > 1
+        /// Pre: x < n
+        ///
         public int HighestSequence(int[] values)
         {
             Contract.Requires(values.Length > 1 );
             Contract.Ensures(
                 Contract.Result<int>() <= values.Length);
+            
 
             IList<int> sequenceCounts = new List<int>();
 
@@ -199,6 +204,8 @@ namespace CompulsoryAssignment
                 Contract.Result<int>() < sortedArray.Length);
             Contract.Ensures(
                 Contract.Exists(0, sortedArray.Length, x => sortedArray[x] > 0));
+            Contract.Ensures(
+                Contract.ForAll(0,sortedArray.Length, x => sortedArray[x] - realNumber <= sortedArray[Contract.Result<int>()]));
 
             decimal minDistance = 0;
             int minIndex = -1;
@@ -215,7 +222,6 @@ namespace CompulsoryAssignment
                         break;
                 }
             }
-
             return minIndex;
         }
 
@@ -249,6 +255,8 @@ namespace CompulsoryAssignment
             Contract.Requires(arr1.Length > 1 && arr2.Length > 1);
             Contract.Ensures(
                 Contract.Result<int[]>().Length >= arr1.Length && Contract.Result<int[]>().Length >= arr2.Length );
+            Contract.Ensures(
+                Contract.ForAll(0, Contract.Result<int[]>().Length,x => arr1.Contains(x) || arr2.Contains(x)));
 
             var union = arr1.Union(arr2).OrderBy(x => x).ToArray();
 
@@ -258,6 +266,11 @@ namespace CompulsoryAssignment
             }
 
             return union;
+        }
+
+        public int[] GetNonIntersect(int[] arr1, int[] arr2)
+        {
+            return arr1.Except(arr2).Union(arr2.Except(arr1)).ToArray();
         }
 
         //Helper method for exercise 4 - Intersection
@@ -271,8 +284,11 @@ namespace CompulsoryAssignment
             Contract.Requires(arr1.Length > 1 && arr2.Length > 1);
             Contract.Ensures(
                 Contract.Result<int[]>().Length <= arr1.Length && Contract.Result<int[]>().Length <= arr2.Length);
+            Contract.Ensures(
+                Contract.ForAll(0,Contract.Result<int[]>().Length, x => arr1.Contains(x) && arr2.Contains(x)));
 
             var intersection = arr1.Intersect(arr2).OrderBy(x => x).ToArray();
+
 
             foreach (var item in intersection)
             {

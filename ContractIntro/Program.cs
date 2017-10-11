@@ -1,11 +1,12 @@
-﻿using System;
+﻿using ContractIntro;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CompulsoryAssignment
+namespace ContractIntro
 {
     public class Program
     {
@@ -30,6 +31,9 @@ namespace CompulsoryAssignment
                     case 1:
                         new Comp1().RunMenu();
                         break;
+                    case 2:
+                        new Exercises41().RunMenu();
+                        break;
                 }
             } while (running);
 
@@ -38,8 +42,9 @@ namespace CompulsoryAssignment
         static void DisplayMenu()
         {
             Console.WriteLine();
-            Console.WriteLine("| Compulsory Assignment 1");
+            Console.WriteLine("| Compulsory Assignment");
             Console.WriteLine("| [1] Compulsory Assignment 1");
+            Console.WriteLine("| [2] Exercises Week 41");
             Console.WriteLine("|");
             Console.WriteLine("| [0] Exit");
             Console.WriteLine();
